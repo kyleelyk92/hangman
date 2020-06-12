@@ -1,5 +1,6 @@
 import random
 from states import states
+import sys
 
 print('type !exit to exit the game')
 words = list(open('words.txt','r').readlines())
@@ -11,14 +12,9 @@ def guess():
     full_bank = list(full) #turn the blanks into a list for index editing
     while tries > 0: # intialize while loop for the try counter
         print(states(tries-1)) #print the state of hangman (hangmans body)
-        if ''.join(full_bank) == word: #if the full set of chosen words eqals the word picked, then ask for restart
-            print('You won')
-            inp = input('Do you want to play again Y/N').lower()
-            if inp == "y":
-                play()
-            elif inp == "n":
-                break
         print(''.join(full_bank))
+        if ''.join(full_bank) == word: #if the full set of chosen words eqals the word picked, then ask for restart
+            win()
         print(f'tries: {tries}')
         letter = input('letter: ')
         if letter in [i for i in word]: #initialize some logic if the letter is in the chosen word
@@ -30,8 +26,29 @@ def guess():
 
         if tries == 0 or letter=="!exit":
             print(f'The correct word was {word}')
-            break
+            again()
+        if letter == word:
+            full_bank = word
+            
 
+def win():
+    print('You won')
+    inp = input('Do you want to play again Y/N: ').lower()
+    if inp == "y":
+        play()
+    elif inp == "n":
+        sys.exit('Exited Game')
+    else:
+        sys.exit(0)
+        
+def again():
+    inp = input('would you like to play again? Y/N: ').lower()
+    if inp == "y":
+        play()
+    elif inp == "n":
+        sys.exit('Exited Game')
+    else:
+        sys.exit(0)
 def play():
     guess()
 
