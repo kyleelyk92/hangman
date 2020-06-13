@@ -17,7 +17,7 @@ def guess():
             win()
         print(f'tries: {tries}')
         letter = input('letter: ')
-        if letter in [i for i in word]: #initialize some logic if the letter is in the chosen word
+        if letter in word: #initialize some logic if the letter is in the chosen word
             for x in range(0,len(list(word))): #make a variable x that goes through the list according to it's index
                 if letter == list(word)[x]: # if the chosen letter equals the index x, then fullbank with index length x, gets changed to the letter
                     full_bank[x] = letter
