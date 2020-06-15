@@ -10,6 +10,7 @@ def guess():
     word = random.choice(words).rstrip() #remove trailing whitespaces from the chosen word
     full = "_"*len(word) #create the fancy blanks
     full_bank = list(full) #turn the blanks into a list for index editing
+    guessed_letters = []
     while tries > 0: # intialize while loop for the try counter
         print(states(tries-1)) #print the state of hangman (hangmans body)
         print(''.join(full_bank))
@@ -17,6 +18,11 @@ def guess():
             win()
         print(f'tries: {tries}')
         letter = input('letter: ')
+        guessed_letters.append(letter)
+        print(f'Guessed letters:')
+        for letter in guessed_letters:
+            print(f'{letter} ', end='')
+        print('')
         if letter in word: #initialize some logic if the letter is in the chosen word
             for x in range(0,len(list(word))): #make a variable x that goes through the list according to it's index
                 if letter == list(word)[x]: # if the chosen letter equals the index x, then fullbank with index length x, gets changed to the letter
